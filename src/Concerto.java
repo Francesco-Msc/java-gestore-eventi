@@ -1,6 +1,8 @@
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Concerto extends Evento {
     private LocalTime time;
@@ -46,5 +48,24 @@ public class Concerto extends Evento {
             throw new IllegalArgumentException("Il prezzo non può essere negativo.");
         }
         this.price = price;
+    }
+
+    //Metodo per restituire la data e ora formattata
+    public String getFormattedDateTime() {
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        return getDate().format(dateFormatter) + " " + time.format(timeFormatter);
+    }
+
+    //Metodo per restituire il prezzo formattato
+    public String getFormattedPrice() {
+        DecimalFormat priceFormatter = new DecimalFormat("##,##0.00€");
+        return priceFormatter.format(price);
+    }
+
+    @Override
+    public String toString(){
+        return getFormattedDateTime() + "-" + getTitle() + "-" + getFormattedPrice();
     }
 }
