@@ -23,4 +23,28 @@ public class Concerto extends Evento {
         this.time = time;
         this.price = price;
     }
+
+    //Getter e esetter per l'ora
+    public LocalTime getTime(){
+        return time;
+    }
+
+    public void setTime(LocalTime time){
+        if (time == null) {
+            throw new IllegalArgumentException("Inserisci un'orario valido.");
+        }
+        this.time = time;
+    }
+
+    //Getter e setter per il prezzo
+    public double getPrice(){
+        return price;
+    }
+
+    public void setPrice(double price){
+        if (price < 0) {
+            throw new IllegalArgumentException("Il prezzo non può essere negativo.");
+        }
+        this.price = price;
+    }
 }
