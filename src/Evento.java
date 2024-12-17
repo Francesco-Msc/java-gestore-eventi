@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Evento {
     private String title;
@@ -76,4 +77,10 @@ public class Evento {
         }
     }
 
+    //Metodo che stampa le informazioni dell'evento
+    public String toString(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String formattedDate = date.format(formatter);
+        return formattedDate + " - " + title;
+    }
 }
