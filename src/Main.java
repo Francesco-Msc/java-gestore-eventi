@@ -68,5 +68,7 @@ public class Main {
             }
         }
         input.close();
+
+        System.out.println("Hai prenotato " + event.getReservedSeats() + " posti per l'evento " + event.toString() + " sono rimasti " + (totalSeats - event.getReservedSeats()) + " posti disponibili");
     }
 }
