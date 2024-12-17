@@ -49,4 +49,31 @@ public class Evento {
     public int getReservedSeats(){
         return bookedSeats;
     }
+
+    //Metodo per eseguire una prenotazione
+    public void makeReservation(int reservations){
+        if (reservations < 0) {
+            throw new IllegalArgumentException("Il numero di prenotazioni dev'essere positivo");
+        } else if (bookedSeats == totalSeats) {
+            throw new IllegalArgumentException("Non ci sono posti disponibili");
+        } else if (bookedSeats + reservations > totalSeats) {
+            throw new IllegalArgumentException("Non ci sono posti a sufficienza per il numero di persone richiesto, sono disponibili " + (totalSeats - bookedSeats) + " posti");
+        } else {
+            bookedSeats += reservations;
+        }
+    }
+
+    //Metodo per disdire una prenotazione
+    public void cancelReservation(int reservations){
+        if (reservations <= 0) {
+            throw new IllegalArgumentException("Il numero di cancellazioni dev'essere positivo");
+        } else if (bookedSeats == 0) {
+            throw new IllegalArgumentException("Non ci sono prenotazioni");
+        } else if (bookedSeats - reservations < 0) {
+            throw new IllegalArgumentException("Non ci sono cosi tante prenotazioni. Al momento il numero di prenotazioni sono " + bookedSeats);
+        } else {
+            bookedSeats -= reservations;
+        }
+    }
+
 }
