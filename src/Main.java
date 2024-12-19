@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        ProgrammaEventi program = new ProgrammaEventi("Programma e gestione eventi");
+        ProgrammaEventi eventProgram = new ProgrammaEventi("Programma e gestione eventi");
         
         boolean running = true;
         while (running) {
@@ -19,7 +19,44 @@ public class Main {
             System.out.print("Scegli un'opzione: ");
             int choice = input.nextInt();
             input.nextLine(); 
-        }
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Inserisci il titolo dell'evento: ");
+                    String title = input.nextLine();
+
+                    System.out.print("Inserisci la data dell'evento (gg/mm/aaaa): ");
+                    String dateString = input.nextLine();
+
+                    System.out.print("Inserisci l'orario dell'evento (HH:mm): ");
+                    String timeString = input.nextLine();
+
+                    System.out.print("Inserisci il numero totale di posti: ");
+                    int totalSeats = input.nextInt();
+
+                    System.out.print("Inserisci il costo del biglietto: ");
+                    double price = input.nextDouble();
+                    input.nextLine();  
+
+                    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+                    LocalDate date = LocalDate.parse(dateString, dateFormatter);
+                    LocalTime time = LocalTime.parse(timeString, timeFormatter);
+
+                    Concerto event = new Concerto(title, date, totalSeats, time, price);
+                    eventProgram.addEvent(event);
+
+                    System.out.println("\n Evento aggiunto con successo!");
+                    break;
+                case 5:
+                    System.out.println("Uscita dal programma...");
+                    running = false;
+                    break;
+            
+                default:
+                    break;
+            }
+        } 
         
         
         
