@@ -65,6 +65,7 @@ public class Main {
                         }
                     }
                     break;
+
                 case 3:
                     if (eventProgram.getEvents() == 0) {
                         System.out.println("\nNon ci sono eventi in programma");
@@ -73,6 +74,21 @@ public class Main {
                         System.out.println(eventProgram.toString());
                     }
                     break;
+                
+                case 4:
+                    if (eventProgram.getEvents() == 0){
+                        System.out.println("\nNon ci sono eventi in programma");
+                        break;
+                    } 
+
+                    System.out.println("Sei sicuro di voler eliminare tutti gli eventi in programma? S/N");
+                    String answer = input.nextLine();
+                    if (answer.equalsIgnoreCase("S")) {
+                        eventProgram.clearEvents();
+                        System.out.println("Lista svuotata con successo!");
+                    } 
+                    break;
+                    
                 case 5:
                     System.out.println("Uscita dal programma...");
                     running = false;
