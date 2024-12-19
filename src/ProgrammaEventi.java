@@ -32,4 +32,20 @@ public class ProgrammaEventi {
         }
         return dateEvents;
     }
+
+    @Override
+    public String toString() {
+    
+    events.sort((e1, e2) -> e1.getDate().compareTo(e2.getDate()));
+
+    StringBuilder result = new StringBuilder(title + "\n");
+
+    for (Evento element : events) {
+        result.append(element.getDate())
+              .append(" - ")
+              .append(element.getTitle())
+              .append("\n");
+    }
+    return result.toString();
+}
 }
