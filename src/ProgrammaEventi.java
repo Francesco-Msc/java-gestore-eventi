@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,5 +21,15 @@ public class ProgrammaEventi {
 
     public int getEvents(){
         return events.size();
+    }
+
+    public List<Evento> getEventPerDate(LocalDate inputDate){
+        List<Evento> dateEvents = new ArrayList<>();
+        for (Evento element : events) {
+            if (element.getDate().equals(inputDate)) {
+                dateEvents.add(element);
+            }
+        }
+        return dateEvents;
     }
 }
