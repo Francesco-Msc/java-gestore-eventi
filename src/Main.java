@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        ProgrammaEventi eventProgram = new ProgrammaEventi("Programma e gestione eventi");
+        ProgrammaEventi eventProgram = new ProgrammaEventi("Programma eventi:\n");
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         
@@ -49,9 +49,9 @@ public class Main {
 
                     System.out.println("\n Evento aggiunto con successo!");
                     break;
-                    
+
                 case 2:
-                    System.out.print("Inserisci la data (gg/mm/aaaa) in cui vuoi cercare eventi: ");
+                    System.out.print("Inserisci la data (gg/mm/aaaa) in cui vuoi cercare eventi.");
                     String search = input.nextLine();
                     LocalDate searchDate = LocalDate.parse(search, dateFormatter);
 
@@ -65,7 +65,14 @@ public class Main {
                         }
                     }
                     break;
-
+                case 3:
+                    if (eventProgram.getEvents() == 0) {
+                        System.out.println("\nNon ci sono eventi in programma");
+                    } else {
+                        System.out.println("\nCi sono un totale di " + eventProgram.getEvents() + " Eventi.");
+                        System.out.println(eventProgram.toString());
+                    }
+                    break;
                 case 5:
                     System.out.println("Uscita dal programma...");
                     running = false;
