@@ -23,6 +23,7 @@ public class ProgrammaEventi {
         return events.size();
     }
 
+    //Metodo per ottenere eventi in una data specifica
     public List<Evento> getEventPerDate(LocalDate inputDate){
         List<Evento> dateEvents = new ArrayList<>();
         for (Evento element : events) {
@@ -33,6 +34,7 @@ public class ProgrammaEventi {
         return dateEvents;
     }
 
+    //Metodo per ottenere tutti gli eventi in ordine cronologico
     @Override
     public String toString() {
     
