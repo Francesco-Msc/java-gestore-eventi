@@ -1,12 +1,15 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         ProgrammaEventi eventProgram = new ProgrammaEventi("Programma e gestione eventi");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         
         boolean running = true;
         while (running) {
@@ -38,8 +41,6 @@ public class Main {
                     double price = input.nextDouble();
                     input.nextLine();  
 
-                    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
                     LocalDate date = LocalDate.parse(dateString, dateFormatter);
                     LocalTime time = LocalTime.parse(timeString, timeFormatter);
 
@@ -48,6 +49,23 @@ public class Main {
 
                     System.out.println("\n Evento aggiunto con successo!");
                     break;
+                    
+                case 2:
+                    System.out.print("Inserisci la data (gg/mm/aaaa) in cui vuoi cercare eventi: ");
+                    String search = input.nextLine();
+                    LocalDate searchDate = LocalDate.parse(search, dateFormatter);
+
+                    List<Evento> eventsOnDate = eventProgram.getEventPerDate(searchDate);
+                    if (eventsOnDate.isEmpty()) {
+                        System.out.println("Non ci sono eventi in questa data.");
+                        break;
+                    } else {
+                        for (Evento events : eventsOnDate) {
+                            System.out.println(events);
+                        }
+                    }
+                    break;
+
                 case 5:
                     System.out.println("Uscita dal programma...");
                     running = false;
