@@ -28,42 +28,47 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    System.out.print("Inserisci il titolo dell'evento: ");
-                    String title = input.nextLine();
-
-                    LocalDate date = null;
-                        while (date == null) {
-                            try {
-                                System.out.print("Inserisci la data dell'evento (gg/mm/aaaa): ");
-                                String dateString = input.nextLine();
-                                date = LocalDate.parse(dateString, dateFormatter);
-                            } catch (DateTimeParseException e) {
-                                System.out.println("\nIl foramto della data è sbagliato per favore inserisci la data con questo formato (gg/mm/aaaa)");
+                    try {
+                        System.out.print("Inserisci il titolo dell'evento: ");
+                        String title = input.nextLine();
+    
+                        LocalDate date = null;
+                            while (date == null) {
+                                try {
+                                    System.out.print("Inserisci la data dell'evento (gg/mm/aaaa): ");
+                                    String dateString = input.nextLine();
+                                    date = LocalDate.parse(dateString, dateFormatter);
+                                } catch (DateTimeParseException e) {
+                                    System.out.println("\nIl foramto della data è sbagliato per favore inserisci la data con questo formato (gg/mm/aaaa)");
+                                }
                             }
-                        }
-                        
-                        LocalTime time = null;
-                        while (time == null) {
-                            try {
-                                System.out.print("Inserisci l'orario dell'evento (HH:mm): ");
-                                String timeString = input.nextLine();
-                                time = LocalTime.parse(timeString, timeFormatter);
-                            } catch (DateTimeParseException e) {
-                                System.out.println("\nIl formato dell'orario è sbagliato per favore inserisci l'orario con questo formato (hh/mm)");
+                            
+                            LocalTime time = null;
+                            while (time == null) {
+                                try {
+                                    System.out.print("Inserisci l'orario dell'evento (HH:mm): ");
+                                    String timeString = input.nextLine();
+                                    time = LocalTime.parse(timeString, timeFormatter);
+                                } catch (DateTimeParseException e) {
+                                    System.out.println("\nIl formato dell'orario è sbagliato per favore inserisci l'orario con questo formato (hh/mm)");
+                                }
                             }
-                        }
+    
+                        System.out.print("Inserisci il numero totale di posti: ");
+                        int totalSeats = input.nextInt();
+    
+                        System.out.print("Inserisci il costo del biglietto: ");
+                        double price = input.nextDouble();
+                        input.nextLine();  
+    
+                        Concerto event = new Concerto(title, date, totalSeats, time, price);
+                        eventProgram.addEvent(event);
+    
+                        System.out.println("\n Evento aggiunto con successo!");
 
-                    System.out.print("Inserisci il numero totale di posti: ");
-                    int totalSeats = input.nextInt();
-
-                    System.out.print("Inserisci il costo del biglietto: ");
-                    double price = input.nextDouble();
-                    input.nextLine();  
-
-                    Concerto event = new Concerto(title, date, totalSeats, time, price);
-                    eventProgram.addEvent(event);
-
-                    System.out.println("\n Evento aggiunto con successo!");
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Errore: " + e.getMessage());
+                    }
                     break;
 
                 case 2:
