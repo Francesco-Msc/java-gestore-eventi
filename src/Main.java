@@ -70,9 +70,21 @@ public class Main {
                             }
                         }
 
-                        System.out.print("Inserisci il costo del biglietto: ");
-                        double price = input.nextDouble();
-                        input.nextLine();
+                        double price = -1.0;
+                        while (price < 0.0) {
+                            try {
+                                System.out.print("Inserisci il costo del biglietto: ");
+                                double ticketPrice = input.nextDouble();
+                                price = ticketPrice;
+                                input.nextLine();
+                                if (price < 0) {
+                                    System.out.println("\nIl prezzo dev'essere maggiore o uguale a 0");
+                                }
+                            } catch (InputMismatchException e) {
+                                System.out.println("\nErrore: per favore inserisci un numero valido.");
+                                input.nextLine();
+                            }
+                        }
 
                         Concerto event = new Concerto(title, date, totalSeats, time, price);
                         eventProgram.addEvent(event);
@@ -85,17 +97,17 @@ public class Main {
                     break;
 
                 case 2:
-                    System.out.print("Inserisci la data (gg/mm/aaaa) in cui vuoi cercare eventi.");
+                    System.out.print("\nInserisci la data (gg/mm/aaaa) in cui vuoi cercare eventi: ");
                     String search = input.nextLine();
                     LocalDate searchDate = LocalDate.parse(search, dateFormatter);
 
                     List<Evento> eventsOnDate = eventProgram.getEventPerDate(searchDate);
                     if (eventsOnDate.isEmpty()) {
-                        System.out.println("Non ci sono eventi in questa data.");
+                        System.out.println("\nNon ci sono eventi in questa data.");
                         break;
                     } else {
                         for (Evento events : eventsOnDate) {
-                            System.out.println(events);
+                            System.out.println("\n" + events);
                         }
                     }
                     break;
@@ -160,7 +172,7 @@ public class Main {
                     }
 
                     if (choosenBooking == null) {
-                        System.out.println("\nNon ci sono prenotazioni con il titolo " + choosenBooking);
+                        System.out.println("\nNon ci sono prenotazioni con il titolo " + cancelBooking);
                         break;
                     } else {
                         try {
@@ -181,11 +193,11 @@ public class Main {
                         break;
                     }
 
-                    System.out.println("Sei sicuro di voler eliminare tutti gli eventi in programma? S/N");
+                    System.out.println("\nSei sicuro di voler eliminare tutti gli eventi in programma? S/N");
                     String answer = input.nextLine();
                     if (answer.equalsIgnoreCase("S")) {
                         eventProgram.clearEvents();
-                        System.out.println("Lista svuotata con successo!");
+                        System.out.println("\nLista svuotata con successo!");
                     }
                     break;
 
