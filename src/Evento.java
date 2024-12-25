@@ -53,7 +53,7 @@ public class Evento {
 
     //Metodo per eseguire una prenotazione
     public void makeReservation(int reservations){
-        if (reservations < 0) {
+        if (reservations <= 0) {
             throw new IllegalArgumentException("Il numero di prenotazioni dev'essere positivo");
         } else if (bookedSeats == totalSeats) {
             throw new IllegalArgumentException("Non ci sono posti disponibili");

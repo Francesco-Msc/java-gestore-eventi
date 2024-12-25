@@ -97,17 +97,28 @@ public class Main {
                     break;
 
                 case 2:
-                    System.out.print("\nInserisci la data (gg/mm/aaaa) in cui vuoi cercare eventi: ");
-                    String search = input.nextLine();
-                    LocalDate searchDate = LocalDate.parse(search, dateFormatter);
 
-                    List<Evento> eventsOnDate = eventProgram.getEventPerDate(searchDate);
-                    if (eventsOnDate.isEmpty()) {
-                        System.out.println("\nNon ci sono eventi in questa data.");
-                        break;
-                    } else {
-                        for (Evento events : eventsOnDate) {
-                            System.out.println("\n" + events);
+                    boolean isDateValid = false;
+                    LocalDate searchDate = null;
+                    while (isDateValid == false) {
+                        try {
+                            System.out.print("\nInserisci la data (gg/mm/aaaa) in cui vuoi cercare eventi: ");
+                            String search = input.nextLine();
+                            searchDate = LocalDate.parse(search, dateFormatter);
+
+                            isDateValid = true;
+        
+                            List<Evento> eventsOnDate = eventProgram.getEventPerDate(searchDate);
+                            if (eventsOnDate.isEmpty()) {
+                                System.out.println("\nNon ci sono eventi in questa data.");
+                                break;
+                            } else {
+                                for (Evento events : eventsOnDate) {
+                                    System.out.println("\n" + events);
+                                }
+                            }
+                        } catch (DateTimeParseException e) {
+                            System.out.println("\nErrore: il formato della data è sbagliato. Per favore, inserisci la data nel formato (gg/mm/aaaa).");
                         }
                     }
                     break;
@@ -148,7 +159,10 @@ public class Main {
                             choosenEvent.makeReservation(bookingsNumber);
                             System.out.println("\nPrenotazione effettuata!");
                         } catch (IllegalArgumentException e) {
-                            System.out.println("Errore: " + e.getMessage());
+                            System.out.println("\nErrore: " + e.getMessage());
+                        } catch (InputMismatchException e) {
+                            System.out.println("\nErrore: Inserisci un numero valido di prenotazioni");
+                            input.nextLine();
                         }
                     }
                     break;
@@ -183,6 +197,9 @@ public class Main {
                             System.out.println("\nDisdetta effettuata!");
                         } catch (IllegalArgumentException e) {
                             System.out.println("Errore: " + e.getMessage());
+                        } catch (InputMismatchException e) {
+                            System.out.println("\nErrore: Inserisci un numero valido di disdette");
+                            input.nextLine();
                         }
                     }
                     break;
