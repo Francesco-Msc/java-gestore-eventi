@@ -17,8 +17,9 @@ public class Main {
             System.out.println("1. Aggiungi un evento");
             System.out.println("2. Visualizza eventi in una data specifica");
             System.out.println("3. Visualizza tutti gli eventi");
-            System.out.println("4. Svuota il programma");
-            System.out.println("5. Esci");
+            System.out.println("4. Aggiungi una prenotazione");
+            System.out.println("5. Svuota il programma");
+            System.out.println("6. Esci");
             System.out.print("Scegli un'opzione: ");
             int choice = input.nextInt();
             input.nextLine(); 
@@ -76,6 +77,38 @@ public class Main {
                     break;
                 
                 case 4:
+                    if (eventProgram.getEvents() == 0) {
+                        System.out.println("\nNon ci sono eventi in programma");
+                        break;
+                    }
+
+                    System.out.println("\nInserisci il titolo dell'evento che vuoi prenotare: ");
+                    String bookTitle = input.nextLine();
+
+                    Evento choosenEvent = null;
+                    for (Evento element : eventProgram.getEventsTitles()) {
+                        if (element.getTitle().equalsIgnoreCase(bookTitle)) {
+                            choosenEvent = element;
+                            break;
+                        }
+                    }
+
+                    if (choosenEvent == null) {
+                        System.out.println("\nNon ci sono eventi con il titolo " + bookTitle);
+                    } else {
+                        try {
+                            System.out.print("Inserisci il numero di prenotazioni che vuoi effettuare: ");
+                            int bookingsNumber = input.nextInt();
+                            input.nextLine();
+                            choosenEvent.makeReservation(bookingsNumber);
+                            System.out.println("\nPrenotazione effettuata!");
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Errore: " + e.getMessage());
+                        }
+                    }
+                    break;
+                
+                case 5:
                     if (eventProgram.getEvents() == 0){
                         System.out.println("\nNon ci sono eventi in programma");
                         break;
@@ -89,7 +122,7 @@ public class Main {
                     } 
                     break;
 
-                case 5:
+                case 6:
                     System.out.println("\nUscita dal programma...");
                     running = false;
                     break;
