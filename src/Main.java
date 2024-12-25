@@ -18,8 +18,9 @@ public class Main {
             System.out.println("2. Visualizza eventi in una data specifica");
             System.out.println("3. Visualizza tutti gli eventi");
             System.out.println("4. Aggiungi una prenotazione");
-            System.out.println("5. Svuota il programma");
-            System.out.println("6. Esci");
+            System.out.println("5. Disdici una prenotazione");
+            System.out.println("6. Svuota il programma");
+            System.out.println("7. Esci");
             System.out.print("Scegli un'opzione: ");
             int choice = input.nextInt();
             input.nextLine(); 
@@ -109,6 +110,39 @@ public class Main {
                     break;
                 
                 case 5:
+                    if (eventProgram.getEvents() == 0) {
+                        System.out.println("\nNon è possibile disdire prenoatzioni perchè non ci sono eventi in programma");
+                        break;
+                    }
+
+                    System.out.println("\nInserisci il titolo dell'evento che vuoi disdire: ");
+                    String cancelBooking = input.nextLine();
+
+                    Evento choosenBooking = null;
+                    for (Evento element : eventProgram.getEventsTitles()) {
+                        if (element.getTitle().equalsIgnoreCase(cancelBooking)) {
+                            choosenBooking = element;
+                            break;
+                        }
+                    }
+
+                    if (choosenBooking == null) {
+                        System.out.println("\nNon ci sono prenotazioni con il titolo " + choosenBooking);
+                        break;
+                    } else {
+                        try {
+                            System.out.print("Inserisci il numero di prenotazioni che vuoi disdire: ");
+                            int cancelBookingsNumber = input.nextInt();
+                            input.nextLine();
+                            choosenBooking.cancelReservation(cancelBookingsNumber);
+                            System.out.println("\nDisdetta effettuata!");
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Errore: " + e.getMessage());
+                        }
+                    }
+                    break;
+
+                case 6:
                     if (eventProgram.getEvents() == 0){
                         System.out.println("\nNon ci sono eventi in programma");
                         break;
@@ -122,7 +156,7 @@ public class Main {
                     } 
                     break;
 
-                case 6:
+                case 7:
                     System.out.println("\nUscita dal programma...");
                     running = false;
                     break;
