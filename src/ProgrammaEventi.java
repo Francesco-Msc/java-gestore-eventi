@@ -34,6 +34,10 @@ public class ProgrammaEventi {
         return dateEvents;
     }
 
+    public List<Evento> getEventsTitles(){
+        return events;
+    }
+
     //Metodo per ottenere tutti gli eventi in ordine cronologico
     @Override
     public String toString() {
