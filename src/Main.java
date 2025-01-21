@@ -23,9 +23,18 @@ public class Main {
             System.out.println("5. Disdici una prenotazione");
             System.out.println("6. Svuota il programma");
             System.out.println("7. Esci");
-            System.out.print("Scegli un'opzione: ");
-            int choice = input.nextInt();
-            input.nextLine();
+
+            int choice = -1;
+            while (choice == -1) {
+                try {
+                    System.out.print("Scegli un'opzione: ");
+                    choice = input.nextInt();
+                    input.nextLine();
+                } catch (InputMismatchException e) {
+                    System.out.println("\nErrore: Inserisci un numero valido (1-7).");
+                    input.nextLine();
+                }
+            }
 
             switch (choice) {
                 case 1:
