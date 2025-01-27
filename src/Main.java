@@ -107,15 +107,12 @@ public class Main {
 
                 case 2:
 
-                    boolean isDateValid = false;
                     LocalDate searchDate = null;
-                    while (isDateValid == false) {
+                    while (searchDate == null) {
                         try {
                             System.out.print("\nInserisci la data (gg/mm/aaaa) in cui vuoi cercare eventi: ");
                             String search = input.nextLine();
                             searchDate = LocalDate.parse(search, dateFormatter);
-
-                            isDateValid = true;
         
                             List<Evento> eventsOnDate = eventProgram.getEventPerDate(searchDate);
                             if (eventsOnDate.isEmpty()) {
